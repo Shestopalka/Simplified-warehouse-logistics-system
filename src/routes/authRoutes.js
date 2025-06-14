@@ -1,16 +1,15 @@
-import { UsersController } from "../controller/usersController.js";
-import { authMiddleware } from "../middleware/authMiddleware.js";
+const { UsersController } = require('../controller/usersController.js');
 
-const usersController = new UsersController;
+const usersController = new UsersController();
 
-export async function authRoutes(req, res) {
+async function authRoutes(req, res) {
     if(req.url === '/auth/registration' && req.method == 'POST'){
+        console.log('test', usersController);
         return await usersController.registration(req, res);
     }
     else if(req.url === '/auth/login' && req.method == "POST"){
         return await usersController.login(req, res);
     }
-   
 }
 
-    
+module.exports = authRoutes;

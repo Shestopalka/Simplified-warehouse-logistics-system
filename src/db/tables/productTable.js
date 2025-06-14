@@ -1,4 +1,4 @@
-import { query } from "../dbPg.js";
+const { query } = require( "../dbPg.js");
 
 
 const createProductTable = `
@@ -15,7 +15,7 @@ const createProductTable = `
     );
 `
 
-export function initProductTable() {
+function initProductTable() {
     return query(createProductTable)
         .then(() => {
             console.log("Table 'product' created!");
@@ -25,3 +25,5 @@ export function initProductTable() {
             
         })
 }
+
+module.exports = { initProductTable };

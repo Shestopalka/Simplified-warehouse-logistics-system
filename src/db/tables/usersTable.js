@@ -1,4 +1,4 @@
-import { query } from "../dbPg.js";
+const {query} = require("../dbPg.js");
 
 const createUsersTable = `
     CREATE TABLE IF NOT EXISTS users (
@@ -10,7 +10,7 @@ const createUsersTable = `
     );
 `;
 
-export function initUserTable() {
+function initUserTable() {
     return query(createUsersTable)  // повертаємо проміс
         .then(() => {
             console.log("Table 'users' created!");
@@ -19,3 +19,5 @@ export function initUserTable() {
             console.error("Error creating table", err);
         });
 }
+
+module.exports = { initUserTable };

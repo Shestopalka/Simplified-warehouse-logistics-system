@@ -1,8 +1,10 @@
-import { CompositionService } from "../service/сompositionService.js";
+const { CompositionService } = require('../service/сompositionService');
 
-export class CompositionController{
-    
-    compositionService = new CompositionService;
+class CompositionController{
+
+    constructor() {
+        this.compositionService = new CompositionService();
+    }
 
     async createCompartment(req, res){       
             let body = '';
@@ -142,11 +144,7 @@ export class CompositionController{
         req.on('end', async () => {
             try{
                 const serial_number  = JSON.parse(body);
-                console.log(serial_number);
-                
-                console.log(typeof serial_number);
-                
-
+            
                 const result = await this.compositionService.deleteProduct(serial_number);
 
                 res.writeHead(201, {'Content-Type': 'application/json'});
@@ -157,4 +155,28 @@ export class CompositionController{
             }
         })
     }
+
+    async deleteCompartment(req, res) {
+        let body = '';
+
+        req.on('data', chunk => {
+            body += chunk;
+        });
+
+        req.on('end', async () => {
+            try{
+                const compartment_name = JSON.parse(body);
+
+                const result = await this.compositionService.deleteCompartment(compartment_name);
+                res.writeHead(201, {'Content-Type': 'application/json'});
+                res.end(JSON.stringify({message: result}));
+            }catch(err){
+                res.writeHead(500);
+                res.end(JSON.stringify({error: err.message}));
+            }
+        })
+    }
 }
+
+
+module.exports = { CompositionController };

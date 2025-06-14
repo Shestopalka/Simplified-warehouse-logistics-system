@@ -1,8 +1,10 @@
-import { RegistrationService } from "../service/authService.js";
+const {RegistrationService} = require('../service/authService'); 
 
-export class UsersController {
+class UsersController {
     
-    registrationService = new RegistrationService
+    constructor() {
+        this.registrationService = new RegistrationService();
+    }
 
     async registration(req, res){
         let body = "";
@@ -53,3 +55,4 @@ export class UsersController {
     
 
 }
+module.exports = { UsersController };

@@ -1,4 +1,5 @@
-import pkg from 'pg';
+
+const pkg = require('pg');
 
 const { Pool } = pkg;
 
@@ -9,7 +10,9 @@ const pool = new Pool({
     password: '99445753'
 })
 
-export async function query(text, params) {
+async function query(text, params) {
     const res = await pool.query(text, params);
     return res;
 }
+
+module.exports = { query };

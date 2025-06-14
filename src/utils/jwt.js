@@ -1,9 +1,9 @@
-import jwt from 'jsonwebtoken';
+const jwt = require('jsonwebtoken');
 
 const JWT_SECRET = '12345';
 
 
-export class JwtStrategy{
+class JwtStrategy{
     generateToken(payload){
         return jwt.sign(payload, JWT_SECRET, {expiresIn: "2h"});
     }
@@ -12,3 +12,5 @@ export class JwtStrategy{
         return jwt.verify(token, JWT_SECRET);
     }
 }
+
+module.exports =  { JwtStrategy };

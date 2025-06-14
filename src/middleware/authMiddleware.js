@@ -1,8 +1,8 @@
-import jwt from 'jsonwebtoken';
+const jwt = require('jsonwebtoken')
 
 const JWT_SECRET = '12345'
 
-export function authMiddleware(req, res, next){
+function authMiddleware(req, res, next){
     const authHeader = req.headers['authorization'];
     const token = authHeader?.split(' ')[1];
     
@@ -20,3 +20,5 @@ export function authMiddleware(req, res, next){
         return res.end(JSON.stringify({message: "Invalid token"}));
     }
 }
+
+module.exports =  { authMiddleware };

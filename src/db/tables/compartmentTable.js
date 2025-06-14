@@ -1,4 +1,4 @@
-import { query } from "../dbPg.js";
+const { query } = require('../dbPg.js');
 
 const createCompartmentTable = `
     CREATE TABLE IF NOT EXISTS compartment (
@@ -10,7 +10,7 @@ const createCompartmentTable = `
     );
 `
 
-export function initCompartmentTable() {
+function initCompartmentTable() {
     return query(createCompartmentTable)
         .then(() => {
             console.log("Table 'compartment' created!");
@@ -20,3 +20,5 @@ export function initCompartmentTable() {
             
         })
 }
+
+module.exports = { initCompartmentTable };

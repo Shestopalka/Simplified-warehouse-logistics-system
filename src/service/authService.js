@@ -1,10 +1,12 @@
-import { query } from "../db/dbPg.js";
-import bcrypt from 'bcrypt';
-import { JwtStrategy } from "../utils/jwt.js";
+const { query } = require('../db/dbPg.js');
+const bcrypt = require('bcrypt');
+const { JwtStrategy } = require('../utils/jwt.js');
 
-export class RegistrationService{
+class RegistrationService{
 
-    jwtStrategy = new JwtStrategy;
+    constructor(jwtStrategy) {
+        this.jwtStrategy = jwtStrategy || new JwtStrategy();
+    }
 
     async registrationUser(userData){
         const { email, password, username } = userData;
@@ -15,7 +17,7 @@ export class RegistrationService{
         console.log(existEmail.rows[0], "TEST SERVICE");
         
         if(existEmail.rows[0]){
-            throw new Error("This email alredy exist!");
+            throw new Error("This email already exists!");
         }
         const saltRound = 10;
         const hashedPassword = await bcrypt.hash(password, saltRound);
@@ -23,9 +25,9 @@ export class RegistrationService{
         const payload = {
             username: username,
             email: email,
-            password: password
+            password: hashedPassword,
         }
-        const token = this.jwtStrategy.generateToken(payload)
+        const token = await this.jwtStrategy.generateToken(payload)
         
         return {user: result.rows[0], token: token};
     }
@@ -40,13 +42,13 @@ export class RegistrationService{
         }
         const comparePassworld = await bcrypt.compare(password, existUser.rows[0].password);
         if(!comparePassworld){
-            throw new Error("Passworlds do not match")
+            throw new Error("Passwords do not match")
         }
 
         const payload = {
-            username: existUser.username,
-            email: existUser.email,
-            password: existUser.password
+            username: existUser.rows[0].username,
+            email: existUser.rows[0].email,
+            password: existUser.rows[0].password
         };
         const userToken = await this.jwtStrategy.generateToken(payload);
 
@@ -54,3 +56,5 @@ export class RegistrationService{
 
     }
 }
+
+module.exports = { RegistrationService };

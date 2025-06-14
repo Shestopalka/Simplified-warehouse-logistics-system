@@ -1,8 +1,8 @@
-import { query } from "../db/dbPg.js";
-import { BadRequestError, ConflictError, NotFoundError } from "../errors/httpError.js";
+const { query } = require("../db/dbPg.js");
+const { BadRequestError, ConflictError, NotFoundError } = require("../errors/httpError.js");
 
 
-export class CompositionService{
+class CompositionService{
 
 
     async createCompartmentForProduct(productData){
@@ -159,3 +159,5 @@ export class CompositionService{
         return products.rows[0];
     }
 }
+
+module.exports = { CompositionService };

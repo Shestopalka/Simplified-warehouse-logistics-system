@@ -1,6 +1,6 @@
 
 
-export class HttpError extends Error {
+class HttpError extends Error {
     constructor(message, status = 500) {
         super(message),
         this.name = this.constructor.name;
@@ -8,26 +8,28 @@ export class HttpError extends Error {
     }
 }
 
-export class BadRequestError extends HttpError {
+class BadRequestError extends HttpError {
     constructor(message = "Bad request") {
         super(message, 400);
     }
 }
 
-export class NotFoundError extends HttpError { 
+class NotFoundError extends HttpError { 
     constructor(message = 'Not found'){
         super(message, 404);
     }
 } 
 
-export class ForbiddenError extends HttpError { 
+class ForbiddenError extends HttpError { 
     constructor(message = 'Forbidden') {
         super(message, 403)
     }
 }
 
-export class ConflictError extends HttpError {
+class ConflictError extends HttpError {
     constructor(message = 'Conflict') {
         super(message, 409);
     }
 }
+
+module.exports = new HttpError, new BadRequestError, new NotFoundError, new ForbiddenError, new ConflictError;

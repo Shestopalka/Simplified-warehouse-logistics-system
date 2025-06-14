@@ -1,4 +1,4 @@
-import { query } from "../dbPg.js";
+const {query} = require("../dbPg.js");
 
 const createCompositionTable = `
    CREATE TABLE IF NOT EXISTS composition (
@@ -11,7 +11,7 @@ const createCompositionTable = `
 `;
 
 
-export function initCompositionTable() {
+function initCompositionTable() {
     return query(createCompositionTable)
         .then(() => {
             console.log("Table 'composition' created!");
@@ -20,3 +20,6 @@ export function initCompositionTable() {
             console.error("Error creating table", err);
         });
 }
+
+module.exports = { initCompositionTable };
+

@@ -1,9 +1,9 @@
-import { CompositionController } from "../controller/compositionController.js";
-import { authMiddleware } from "../middleware/authMiddleware.js";
+const { CompositionController } = require("../controller/compositionController.js");
+const {authMiddleware} = require('../middleware/authMiddleware.js');
 
-const compositionController = new CompositionController;
+const compositionController = new CompositionController();
 
-export async function compositionRoutes(req, res) {
+async function compositionRoutes(req, res) {
     if(req.url === '/composition/getAllproduct' && req.method =='GET'){
         authMiddleware(req, res, async () => {
             await compositionController.getProduct(req, res);
@@ -39,3 +39,5 @@ export async function compositionRoutes(req, res) {
         });
     }
 }
+
+module.exports =  { compositionRoutes };
