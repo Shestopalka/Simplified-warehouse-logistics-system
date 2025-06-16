@@ -31,5 +31,10 @@ class ConflictError extends HttpError {
         super(message, 409);
     }
 }
-
-module.exports = new HttpError, new BadRequestError, new NotFoundError, new ForbiddenError, new ConflictError;
+module.exports = { 
+  HttpError, 
+  BadRequestError, 
+  NotFoundError, 
+  ForbiddenError, 
+  ConflictError 
+};

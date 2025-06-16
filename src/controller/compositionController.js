@@ -1,4 +1,4 @@
-const { CompositionService } = require('../service/сompositionService');
+const { CompositionService } = require('../service/compositionService');
 
 class CompositionController{
 
@@ -113,9 +113,10 @@ class CompositionController{
         })
     }
 
-    async getProductComposition(req, res) {
+    async getCompartmentComposition(req, res) {
         try{
-            const product = await this.compositionService.getProductFromComposition();
+            
+            const product = await this.compositionService.getCompartmentFromComposition();
             res.writeHead(200, {'Content-Type': 'application/json'});
             res.end(JSON.stringify({message: product}));
         }catch(err){

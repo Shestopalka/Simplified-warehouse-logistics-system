@@ -4,6 +4,7 @@ const { BadRequestError, ConflictError, NotFoundError } = require("../errors/htt
 
 class CompositionService{
 
+    
 
     async createCompartmentForProduct(productData){
         try{
@@ -60,14 +61,12 @@ class CompositionService{
             
         }catch(err){
             console.log(err.message);
-            throw Error(err.message);
+            return err.message;
         }
     }
 
     async createProduct(productData){
-        try{
-            const length = Object.keys(productData).length
-            if(length.length < 6) {
+            if(!productData  || Object.keys(productData).length < 6) {
                 throw new BadRequestError("You have not filled in all the columns!");
             }
 
@@ -78,16 +77,16 @@ class CompositionService{
             
             const newProduct = await query("INSERT INTO product (product_name, price_pet_unit, unit_weight, total_cost, serial_number, total_number) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *", [product_name, price_pet_unit, unit_weight, total_cost, serial_number, total_number]);
             return {message: "Product created successfuly!", product: newProduct.rows[0]};
-        }catch(err){
-            console.log(err.message);
-            return err.message;
-            
-        }
+
     }
 
-    async deleteProduct(serial_number){
+    async deleteProduct(data){
 
-        const { ...serial_Number } = serial_number;
+        if (!data || Object.keys(data).length === 0) {
+            throw new Error("You have not filled in all the columns!");
+        }
+
+        const { ...serial_Number } = data;
         console.log('This serial_number FROM service:', serial_Number.serial_number);
         
         const existProduct = await query("SELECT * FROM product WHERE serial_number = $1", [serial_Number.serial_number]);
@@ -97,7 +96,7 @@ class CompositionService{
 
         await query("DELETE FROM product WHERE serial_number = $1", [serial_Number.serial_number]);
 
-        return {message: "Product delete succesfuly!"};
+        return {message: "Product delete successfuly!"};
     }
 
     async deleteCompartment(compartment_name) {
@@ -108,6 +107,8 @@ class CompositionService{
         }
 
         await query("DELETE FROM compartment WHERE id = $1", [existCompartment.rows[0].id]);
+
+        return {message: "Compartent delete successfuly!"};
     }
 
     async updateProduct(updateData,) {
@@ -129,11 +130,14 @@ class CompositionService{
         console.log([...values, serial_number]);
         
         await query(`UPDATE product SET ${setClause} WHERE serial_number = $${values.length}`, [...values]);
+
+        return { message: "Product updated successfuly!" };
     }
 
-    async getProductFromComposition() {
-        const products = await query('SELECT * FROM composition');
-        return products.rows[0];
+    async getCompartmentFromComposition() {
+        const compartments = await query('SELECT * FROM composition');
+        
+        return compartments.rows;
     }
 
     async updateCompartment(updateData) {
@@ -151,12 +155,14 @@ class CompositionService{
         values.push(compartment_name);
 
         await query(`UPDATE compartment SET ${setClause} WHERE compartment_name = $${values.length}`, [...values]);
+
+        return { message: "Compartment updated successfuly!" };
     }
 
     async getProductFromCompartment() {
         const products = await query('SELECT * FROM compartment');
         
-        return products.rows[0];
+        return products.rows;
     }
 }
 

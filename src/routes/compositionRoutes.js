@@ -4,9 +4,9 @@ const {authMiddleware} = require('../middleware/authMiddleware.js');
 const compositionController = new CompositionController();
 
 async function compositionRoutes(req, res) {
-    if(req.url === '/composition/getAllproduct' && req.method =='GET'){
+    if(req.url === '/composition/getAllcompartment' && req.method =='GET'){
         authMiddleware(req, res, async () => {
-            await compositionController.getProduct(req, res);
+            await compositionController.getCompartmentComposition(req, res);
         })
     }else if(req.url === '/composition/getProductFromCompartment' && req.method == 'GET'){
         authMiddleware(req, res, async () => {
