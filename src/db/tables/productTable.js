@@ -1,3 +1,4 @@
+const logger = require("../../utils/logger.js");
 const { query } = require( "../dbPg.js");
 
 
@@ -18,10 +19,10 @@ const createProductTable = `
 function initProductTable() {
     return query(createProductTable)
         .then(() => {
-            console.log("Table 'product' created!");
+            logger.info("Table 'product' created!");
         })
         .catch((err) => {
-            console.error("Error creating rable", err);
+            logger.error("Error creating rable", err);
             
         })
 }

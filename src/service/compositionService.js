@@ -1,5 +1,6 @@
 const { query } = require("../db/dbPg.js");
 const { BadRequestError, ConflictError, NotFoundError } = require("../errors/httpError.js");
+const logger = require("../utils/logger.js");
 
 
 class CompositionService{
@@ -21,7 +22,7 @@ class CompositionService{
 
             return {message: "Add compartment on composition", composition: composition.rows[0]};
         }catch(err){
-            console.error("Error", err);
+            logger.error("Error", err);
             return err.message
             
         }
@@ -33,10 +34,7 @@ class CompositionService{
             const existCompartment = await query("SELECT * FROM compartment WHERE compartment_name = $1", [compartment_name]);
             if(!existCompartment.rows[0]){
                 throw new NotFoundError("Compartment not found");
-            }
-                    
-            console.log(productData);
-            
+            }           
 
             const existProduct = await query("SELECT * FROM product WHERE serial_number = $1", [serial_number]);
             
@@ -60,7 +58,7 @@ class CompositionService{
             return {message: "Product add from compartment successfuly!", compartment: updateCompartment.rows[0]};
             
         }catch(err){
-            console.log(err.message);
+            logger.error(err.message);
             return err.message;
         }
     }

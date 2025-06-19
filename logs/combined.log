@@ -1,0 +1,57 @@
+2025-06-19 20:47:54 [[32minfo[39m]: Table 'compartment' created!
+2025-06-19 20:47:54 [[32minfo[39m]: Table 'composition' created!
+2025-06-19 20:47:54 [[32minfo[39m]: Table 'product' created!
+2025-06-19 20:47:54 [[32minfo[39m]: Table 'users' created!
+2025-06-19 20:47:54 [[32minfo[39m]: Table 'compartment' created!
+2025-06-19 20:47:54 [[32minfo[39m]: Table 'composition' created!
+2025-06-19 20:47:54 [[32minfo[39m]: Table 'product' created!
+2025-06-19 20:47:54 [[32minfo[39m]: Table 'users' created!
+2025-06-19 20:48:49 [[32minfo[39m]: Table 'compartment' created!
+2025-06-19 20:48:49 [[32minfo[39m]: Table 'composition' created!
+2025-06-19 20:48:49 [[32minfo[39m]: Table 'product' created!
+2025-06-19 20:48:49 [[32minfo[39m]: Table 'users' created!
+2025-06-19 20:48:49 [[32minfo[39m]: DB started!
+2025-06-19 20:48:49 [[32minfo[39m]: Server running on http://localhost:3000
+2025-06-19 20:49:10 [[32minfo[39m]: Table 'compartment' created!
+2025-06-19 20:49:10 [[32minfo[39m]: Table 'composition' created!
+2025-06-19 20:49:10 [[32minfo[39m]: Table 'product' created!
+2025-06-19 20:49:10 [[32minfo[39m]: Table 'users' created!
+2025-06-19 20:49:10 [[32minfo[39m]: DB started!
+2025-06-19 20:49:10 [[32minfo[39m]: Server running on http://localhost:3000
+2025-06-19 20:49:36 [[32minfo[39m]: Table 'compartment' created!
+2025-06-19 20:49:36 [[32minfo[39m]: Table 'composition' created!
+2025-06-19 20:49:36 [[32minfo[39m]: Table 'product' created!
+2025-06-19 20:49:36 [[32minfo[39m]: Table 'users' created!
+2025-06-19 20:49:36 [[32minfo[39m]: DB started!
+2025-06-19 20:49:36 [[32minfo[39m]: Server running on http://localhost:3000
+2025-06-19 20:49:37 [[32minfo[39m]: Table 'compartment' created!
+2025-06-19 20:49:37 [[32minfo[39m]: Table 'composition' created!
+2025-06-19 20:49:37 [[32minfo[39m]: Table 'product' created!
+2025-06-19 20:49:37 [[32minfo[39m]: Table 'users' created!
+2025-06-19 20:49:37 [[32minfo[39m]: DB started!
+2025-06-19 20:49:37 [[32minfo[39m]: Server running on http://localhost:3000
+2025-06-19 20:51:15 [[32minfo[39m]: Table 'compartment' created!
+2025-06-19 20:51:15 [[32minfo[39m]: Table 'composition' created!
+2025-06-19 20:51:15 [[32minfo[39m]: Table 'product' created!
+2025-06-19 20:51:15 [[32minfo[39m]: Table 'users' created!
+2025-06-19 20:51:15 [[32minfo[39m]: Table 'compartment' created!
+2025-06-19 20:51:15 [[32minfo[39m]: Table 'composition' created!
+2025-06-19 20:51:15 [[32minfo[39m]: Table 'product' created!
+2025-06-19 20:51:15 [[32minfo[39m]: Table 'users' created!
+2025-06-19 20:52:25 [[32minfo[39m]: Table 'compartment' created!
+2025-06-19 20:52:25 [[32minfo[39m]: Table 'composition' created!
+2025-06-19 20:52:25 [[32minfo[39m]: Table 'product' created!
+2025-06-19 20:52:25 [[32minfo[39m]: Table 'users' created!
+2025-06-19 20:54:03 [[32minfo[39m]: Table 'compartment' created!
+2025-06-19 20:54:03 [[32minfo[39m]: Table 'composition' created!
+2025-06-19 20:54:03 [[32minfo[39m]: Table 'product' created!
+2025-06-19 20:54:28 [[32minfo[39m]: Table 'compartment' created!
+2025-06-19 20:54:28 [[32minfo[39m]: Table 'composition' created!
+2025-06-19 20:54:28 [[32minfo[39m]: Table 'product' created!
+2025-06-19 20:54:28 [[32minfo[39m]: Table 'order' created!
+2025-06-19 20:54:28 [[32minfo[39m]: Table 'users' created!
+2025-06-19 20:54:28 [[32minfo[39m]: DB started!
+2025-06-19 20:54:28 [[32minfo[39m]: Consumer listen: order_processing_queue
+2025-06-19 20:54:28 [[32minfo[39m]: Consumer listen: order_confirmation_queue
+2025-06-19 20:54:28 [[32minfo[39m]: Consumer listen: delivery_queue
+2025-06-19 20:54:28 [[32minfo[39m]: Server running on http://localhost:3000

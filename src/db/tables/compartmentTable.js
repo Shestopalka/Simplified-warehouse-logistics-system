@@ -1,3 +1,4 @@
+const logger = require('../../utils/logger.js');
 const { query } = require('../dbPg.js');
 
 const createCompartmentTable = `
@@ -13,10 +14,10 @@ const createCompartmentTable = `
 function initCompartmentTable() {
     return query(createCompartmentTable)
         .then(() => {
-            console.log("Table 'compartment' created!");
+            logger.info("Table 'compartment' created!");
         })
         .catch((err) => {
-            console.error("Error creating table", err);
+            logger.error(`Error creating table, ${err.message}`);
             
         })
 }

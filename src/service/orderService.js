@@ -2,6 +2,7 @@ const { query } = require("../db/dbPg");
 const { handleError } = require("../errors/handleError");
 const { BadRequestError, NotFoundError } = require("../errors/httpError");
 const {CompositionService} = require('../service/compositionService.js');
+const logger = require("../utils/logger.js");
 
 class OrdersService {
 
@@ -9,9 +10,7 @@ class OrdersService {
         this.compositionService = new CompositionService();
     }
     async createOrder(orderData, callback) {
-        try{
-            console.log("THIS IS ORDER SERVICE");
-            
+        try{         
             const length = Object.keys(orderData).length;
             if(length < 6)
                 throw new BadRequestError("Enter all fields to form an order")
@@ -46,10 +45,10 @@ class OrdersService {
 
             if (callback) await callback(order);
 
-            console.log(" Order processed.");
+            logger.info(" Order processed.");
         } catch (err) {
             const error = handleError(err)
-            console.error(" Error in consumer:", err.message);
+            logger.error(" Error in consumer:", err.message);
             throw new err;
         }
             
@@ -62,11 +61,9 @@ class OrdersService {
                 throw new  BadRequestError("Enter all fields to form an order")
             }
             const {orderId, compartment_name} = confrimdData;
-            console.log('This is orderID and compartment_name from ConfrimOrder', orderId, compartment_name);
             
             
             const existOrder = await query("SELECT * FROM orders WHERE id = $1", [orderId]);
-            console.log('This Confrim order - existOrder:', existOrder.rows[0]);
             
             if(!existOrder.rows[0]){
                 throw new NotFoundError('Order not found')
@@ -78,14 +75,14 @@ class OrdersService {
 
             const confrimedOrder = await query("UPDATE orders SET status = $1 WHERE id = $2 RETURNING *", ['confirmed', orderId]);
 
-            console.log(`Замовлення ${confrimedOrder.rows[0].id} успішно підтверджено, та очікує доставки.`);
+            logger.info(`Order ${confrimedOrder.rows[0].id} confrimed successfuly!`);
             
             if(callback){
                 await callback(confrimedOrder);
             }
 
         }catch(err){
-            console.log(err.message);
+            logger.error(err.message);
             throw new err
             
         }
@@ -129,7 +126,7 @@ class OrdersService {
 
         if(callback) callback(deliveredProduct);
         }catch(err){
-            console.error(err.message);
+            logger.error(err.message);
             
         }
         

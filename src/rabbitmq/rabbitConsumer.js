@@ -1,6 +1,7 @@
 const amqp = require("amqplib");
 const { query } = require('../db/dbPg.js');
 const { handleError } = require("../errors/handleError.js");
+const logger = require("../utils/logger.js");
 
 async function startConsumer(queueName, callback) {
     
@@ -17,7 +18,7 @@ async function startConsumer(queueName, callback) {
                 await callback(data);
                 channel.ack(msg);
             } catch (err) {
-                console.error(`❌ Error processing message in queue "${queueName}":`, err.message);
+                logger.error(`❌ Error processing message in queue "${queueName}":`, err.message);
 
                 const error = handleError(err)
                 if(data?.orderId) {
@@ -30,7 +31,7 @@ async function startConsumer(queueName, callback) {
         }
     });
 
-    console.log(`🟢 Консюмер слухає: ${queueName}`);
+    logger.info(`Consumer listen: ${queueName}`);
 
 }
 

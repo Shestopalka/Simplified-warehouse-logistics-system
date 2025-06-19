@@ -1,3 +1,4 @@
+const logger = require("../../utils/logger.js");
 const {query} = require("../dbPg.js");
 
 const createUsersTable = `
@@ -13,10 +14,10 @@ const createUsersTable = `
 function initUserTable() {
     return query(createUsersTable)  // повертаємо проміс
         .then(() => {
-            console.log("Table 'users' created!");
+            logger.info("Table 'users' created!");
         })
         .catch((err) => {
-            console.error("Error creating table", err);
+            logger.error("Error creating table", err);
         });
 }
 

@@ -1,5 +1,6 @@
 
 const amqp = require('amqplib');
+const logger = require('../utils/logger');
 
 
 async function sendToQueue(queueName, message) {
@@ -10,9 +11,9 @@ async function sendToQueue(queueName, message) {
     channel.sendToQueue(queueName, Buffer.from(JSON.stringify(message)), {
         persistent: true,
     });
-    console.log("This name queue",queueName);
+    logger.info("This name queue",queueName);
     
-    console.log('Message sent:', message);
+    logger.info('Message sent:', message);
 
     await channel.close();
     await connection.close();

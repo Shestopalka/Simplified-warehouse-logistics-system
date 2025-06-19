@@ -1,6 +1,8 @@
 const { query } = require('../db/dbPg.js');
 const bcrypt = require('bcrypt');
 const { JwtStrategy } = require('../utils/jwt.js');
+const logger = require('../utils/logger.js');
+const { NotFoundError, BadRequestError } = require('../errors/httpError.js');
 
 class RegistrationService{
 
@@ -11,13 +13,12 @@ class RegistrationService{
     async registrationUser(userData){
         const { email, password, username } = userData;
 
-        console.log(email, username, password);
+        logger.info(email, username, password);
         
         const existEmail = await query("SELECT * FROM users WHERE email = $1", [email])
-        console.log(existEmail.rows[0], "TEST SERVICE");
         
         if(existEmail.rows[0]){
-            throw new Error("This email already exists!");
+            throw new BadRequestError("This email already exists!");
         }
         const saltRound = 10;
         const hashedPassword = await bcrypt.hash(password, saltRound);
@@ -38,11 +39,11 @@ class RegistrationService{
 
         const existUser = await query('SELECT * FROM users WHERE email = $1', [email]);
         if(!existUser.rows[0]){
-            throw new Error("User not found");
+            throw new NotFoundError("User not found");
         }
         const comparePassworld = await bcrypt.compare(password, existUser.rows[0].password);
         if(!comparePassworld){
-            throw new Error("Passwords do not match")
+            throw new NotFoundError("Passwords do not match")
         }
 
         const payload = {
